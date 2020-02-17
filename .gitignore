@@ -1,1 +1,8 @@
+#binaries
+__pycache__/
+
+#IDE
 .vscode
+
+#Flask envs
+instance/
