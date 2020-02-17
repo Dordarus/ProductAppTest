@@ -2,7 +2,7 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-class BaseConfig:
+class Config:
     """
     Base application configuration
     """
@@ -14,13 +14,13 @@ class BaseConfig:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
 
-class DevelopmentConfig(BaseConfig):
+class DevelopmentConfig(Config):
     """
     Development application configuration
     """
     DEBUG = True
 
-class TestingConfig(BaseConfig):
+class TestingConfig(Config):
     """
     Testing application configuration
     """
@@ -29,8 +29,14 @@ class TestingConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI =\
         'sqlite:////' + os.path.join(basedir, 'test_data.sqlite')
 
-class ProductionConfig(BaseConfig):
+class ProductionConfig(Config):
     """
     Production application configuration
     """
     DEBUG = True
+
+app_config = {
+    'development': DevelopmentConfig,
+    'production': ProductionConfig,
+    'test': TestingConfig
+}
