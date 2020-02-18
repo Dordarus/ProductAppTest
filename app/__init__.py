@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_seeder import FlaskSeeder
 
 from .config import app_config
 
@@ -14,6 +15,9 @@ app.config.from_object(app_config[environment])
 db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
+
+seeder = FlaskSeeder()
+seeder.init_app(app, db)
 
 from app import views, models
 

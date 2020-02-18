@@ -1,0 +1,44 @@
+[
+    {
+	"product_id": 132456,
+	"product_price": 5.05,
+	"product_name": "Flex",
+	"size": "42"
+    },
+    {
+	"product_id": 132457,
+	"product_price": 1000,
+	"product_name": "Yeezy",
+	"size": "36"
+    },
+    {
+	"product_id": 132458,
+	"product_price": 5.05,
+	"product_name": "Foam",
+	"size": "41"
+    },
+    {
+	"product_id": 132459,
+	"product_price": 5.05,
+	"product_name": "Predator",
+	"size": "38"
+    },
+    {
+	"product_id": 132460,
+	"product_price": 5.05,
+	"product_name": "Nemesis",
+	"size": "42"
+    },
+    {
+	"product_id": 132461,
+	"product_price": 5.05,
+	"product_name": "Copa",
+	"size": "36"
+    },
+    {
+	"product_id": 132462,
+	"product_price": 5.05,
+	"product_name": "Williams",
+	"size": "38"
+    }
+]
