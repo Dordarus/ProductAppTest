@@ -11,7 +11,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI =\
         'sqlite:////' + os.path.join(basedir, 'data.sqlite')
 
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False   
 
 
 class DevelopmentConfig(Config):
@@ -19,6 +19,7 @@ class DevelopmentConfig(Config):
     Development application configuration
     """
     DEBUG = True
+    SQLALCHEMY_ECHO = True
 
 class TestingConfig(Config):
     """
@@ -26,6 +27,7 @@ class TestingConfig(Config):
     """
     DEBUG = True
     TESTING = True
+    SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI =\
         'sqlite:////' + os.path.join(basedir, 'test_data.sqlite')
 
