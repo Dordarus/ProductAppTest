@@ -1,8 +1,7 @@
-from flask import make_response, jsonify
+from .helper import message_response, product_response
 from app.models import Product
 from . import product
 
-# TODO: Refactor requests to helpers
 @product.route('/products/<product_id>', methods=['GET'])
 def show(product_id):
     """
@@ -11,23 +10,13 @@ def show(product_id):
     :return:
     """
 
-    try:
-        int(product_id)
-    except ValueError:
-        return make_response(jsonify({
-            'message': "Use valid product id"
-        })), 422
-    else:
-        product = Product.get_by_id(product_id)
+    product = Product.get_by_id(product_id)
 
-        if product:
-            return make_response(
-                jsonify(
-                    product.json()
-                )
-            ), 200
-        else:
-            return make_response(jsonify({
-                'message': "Product with id=%s doesn`t exist" % product_id
-            })), 404
+    if product:
+        return product_response(product)
+    else:
+        return message_response(
+            f"Product with id={product_id} doesn`t exist",
+            404
+        )
         
