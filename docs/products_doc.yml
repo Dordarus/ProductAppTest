@@ -1,0 +1,28 @@
+Returns a single product
+---
+parameters:
+- name: "product_id"
+  in: "path"
+  description: "ID of product to return"
+  required: true
+  type: "integer"
+responses:
+  200:
+    description: "successful operation"
+    schema:
+      properties:
+        product_id:
+          type: "integer"
+        product_name:
+          type: "string"
+        product_price:
+          type: "number"
+        size:
+          type: "integer"
+  404:
+    description: "Product not found"
+    schema:
+      properties:
+        message:
+          type: "string"
+          default: "Product with id=0000 doesn`t exist"

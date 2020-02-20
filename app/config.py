@@ -25,7 +25,6 @@ class TestingConfig(Config):
     """
     Testing application configuration
     """
-    DEBUG = True
     TESTING = True
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI =\
