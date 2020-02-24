@@ -34,7 +34,6 @@ class ProductionConfig(Config):
     """
     Production application configuration
     """
-    DEBUG = True
 
 app_config = {
     'development': DevelopmentConfig,

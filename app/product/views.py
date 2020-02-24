@@ -1,3 +1,4 @@
+from flask import abort
 from .helper import message_response, product_response
 from app.models import Product
 from flasgger import swag_from
@@ -12,6 +13,10 @@ def show(product_id):
     :return:
     """
 
+    #Just simulate 500 for logging
+    if product_id == '500':
+        abort(500)
+
     product = Product.get_by_id(product_id)
 
     if product:
@@ -21,4 +26,3 @@ def show(product_id):
             f"Product with id={product_id} doesn`t exist",
             404
         )
-        

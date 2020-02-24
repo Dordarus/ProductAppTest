@@ -1,4 +1,8 @@
 import os
+import logging
+from logs import file_handler, logging_level
+
+from .config import app_config
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -7,12 +11,14 @@ from flask_seeder import FlaskSeeder
 from flasgger import Swagger
 from docs import template
 
-from .config import app_config
 
 environment = os.environ.get('FLASK_ENV')
 
 app = Flask(__name__, static_folder=None)
 app.config.from_object(app_config[environment])
+
+app.logger.addHandler(file_handler)
+app.logger.setLevel(logging_level)
 
 db = SQLAlchemy(app)
 
