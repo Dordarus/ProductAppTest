@@ -1,7 +1,11 @@
-import time
+import time, os
+from app.config import app_config
 from logging import Formatter, Filter, INFO
 from logging.handlers import RotatingFileHandler
 from flask import has_request_context, request, g
+
+environment = os.environ.get('FLASK_ENV')
+log_file_path = app_config[environment].LOG_FILE
 
 class RequestFormatter(Formatter):
     """Add duration and url attributes to Formatter object"""
@@ -36,7 +40,7 @@ class TracebackInfoFilter(Filter):
         return True
 
 logging_level = INFO
-file_handler = RotatingFileHandler('logs/status.log')
+file_handler = RotatingFileHandler(log_file_path)
 file_handler.setFormatter(file_formatter)
 file_handler.addFilter(TracebackInfoFilter())
 file_handler.setLevel(logging_level)

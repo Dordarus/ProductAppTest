@@ -27,7 +27,7 @@ migrate = Migrate(app, db)
 seeder = FlaskSeeder()
 seeder.init_app(app, db)
 
-from app import views, models
+from . import views, models
 
 from app.product import product
 app.register_blueprint(product, url_prefix='/api/v1')

@@ -11,7 +11,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI =\
         'sqlite:////' + os.path.join(basedir, 'data.sqlite')
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = False   
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    LOG_FILE = os.path.join(basedir, '../logs/status.log')
 
 
 class DevelopmentConfig(Config):
@@ -20,6 +21,7 @@ class DevelopmentConfig(Config):
     """
     DEBUG = True
     SQLALCHEMY_ECHO = True
+    
 
 class TestingConfig(Config):
     """
@@ -29,6 +31,7 @@ class TestingConfig(Config):
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI =\
         'sqlite:////' + os.path.join(basedir, 'test_data.sqlite')
+    LOG_FILE = os.path.join(basedir, '../logs/test_status.log')
 
 class ProductionConfig(Config):
     """

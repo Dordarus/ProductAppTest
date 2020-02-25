@@ -1,4 +1,5 @@
-import json
+import json, os
+from logs import log_file_path
 from app import app, db
 from flask import Flask
 from app.models import Product
@@ -15,6 +16,9 @@ class BaseTestCase(TestCase):
         db.create_all()
 
     def tearDown(self):
+        if os.path.isfile(log_file_path):
+            os.remove(log_file_path)
+
         db.session.remove()
         db.drop_all()
 

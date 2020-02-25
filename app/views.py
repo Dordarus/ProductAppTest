@@ -1,7 +1,6 @@
 import time
 from . import app
-from flask import g
-from werkzeug.exceptions import InternalServerError
+from flask import g, make_response, jsonify
 
 @app.before_request
 def before_request():
@@ -9,12 +8,17 @@ def before_request():
 
 @app.after_request
 def after_request(response):
-    level_dict = {200: 'info', 404: 'warning'}
-    logger_obj = getattr(app.logger, level_dict[response.status_code])
-    logger_obj(response.status)
-    return response
+  if response.status_code == 200:
+    app.logger.info(response.status)
 
-@app.errorhandler(InternalServerError)
-def handle_500(e):
-    app.logger.error(e, exc_info=None)
-    return e
+  return response
+
+@app.errorhandler(Exception)
+def unhandled_exception(e):
+  error_desc = f"[{e.code} {e.name}] {e.description}"
+
+  app.logger.error(error_desc)
+
+  return make_response(
+    jsonify({'message': error_desc})
+  ), e.code
