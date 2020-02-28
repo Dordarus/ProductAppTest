@@ -32,4 +32,7 @@ from . import views, models
 from app.product import product
 app.register_blueprint(product, url_prefix='/api/v1')
 
+from app.health import health
+app.register_blueprint(health)
+
 Swagger(app, template=template)

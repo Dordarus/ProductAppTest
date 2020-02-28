@@ -15,10 +15,13 @@ def after_request(response):
 
 @app.errorhandler(Exception)
 def unhandled_exception(e):
-  error_desc = f"[{e.code} {e.name}] {e.description}"
+  try:
+    except_dict = {"code": e.code, "message": f"[{e.code} {e.name}] {e.description}"}
+  except AttributeError as ex:
+    except_dict = {"code": 500, "message": str(e)}
 
-  app.logger.error(error_desc)
+  app.logger.error(except_dict["message"])
 
   return make_response(
-    jsonify({'message': error_desc})
-  ), e.code
+    jsonify({'message': except_dict["message"]})
+  ), except_dict["code"]
