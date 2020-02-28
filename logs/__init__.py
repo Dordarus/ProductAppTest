@@ -20,9 +20,9 @@ class RequestFormatter(Formatter):
         return super().format(record)
 
 file_formatter = RequestFormatter(
-    "{'time':'%(asctime)s', 'name': '%(name)s', \
-    'level': '%(levelname)s', 'message': '%(message)s',\
-    'duration': '%(duration)s', 'url':'%(url)s'},"
+    '{"time":"%(asctime)s", "name": "%(name)s", \
+    "level": "%(levelname)s", "message": "%(message)s",\
+    "duration": "%(duration)s", "url":"%(url)s"}'
 )
 
 class TracebackInfoFilter(Filter):

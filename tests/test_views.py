@@ -4,8 +4,6 @@ import unittest
 
 class TestViews(BaseTestCase):
     def test_show_with_right_product_id(self):
-        self.seed_db()
-
         product_id = 132456
         product = Product.get_by_id(product_id)
 
@@ -19,8 +17,6 @@ class TestViews(BaseTestCase):
         self.assertEqual(data['size'],  product.size)
 
     def test_show_with_wrong_product_id(self):
-        self.seed_db()
-
         product_id_with_letters = 'abc'
         product_id_with_not_exist_number = 42
         blank_product_id = None

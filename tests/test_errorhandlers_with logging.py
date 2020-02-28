@@ -1,6 +1,7 @@
-from tests.base import BaseTestCase, json
+from tests.base import BaseTestCase
 from app.models import Product
-import unittest
+from tests.helpers import get_last_log_record
+import unittest, json
 
 class TestErrorHandlersWithLogging(BaseTestCase):
 
@@ -18,40 +19,46 @@ class TestErrorHandlersWithLogging(BaseTestCase):
 
         self.assertIn('[404 Not Found]', data['message'])
 
-    # def test_pagenotfound_logs(self):
-    #     result = self.app.get('/missing-page') 
+    def test_pagenotfound_logs(self):
+        response = self.client.get('/missing_page')
+        data = json.loads(response.data.decode())
 
-    #     self.assertEqual(result.status_code, 404) 
+        last_log_dict = get_last_log_record()
 
-    # def test_unhandledexception_statuscode(self):
-    #     result = self.app.get('/products') 
+        self.assertEqual(data['message'], last_log_dict['message']) 
 
-    #     self.assertEqual(result.status_code, 500) 
+    def test_unhandledexception_statuscode(self):
+        with self.client:
+            response = self.client.get('api/v1/products/500')
 
-    # def test_unhandledexception_data(self):
-    #     result = self.app.get('/products') 
+        self.assertEqual(response.status_code, 500) 
 
-    #     self.assertIn('Something Went Wrong', result.data)
+    def test_unhandledexception_data(self):
+        with self.client:
+            response = self.client.get('api/v1/products/500')
 
-    # def test_unhandledexception_logs(self):
-    #     result = self.app.get('/missing-page') 
+        data = json.loads(response.data.decode())
 
-    #     self.assertEqual(result.status_code, 404) 
+        self.assertIn('[500 Internal Server Error]', data['message'])
 
-    # def test_success_statuscode(self):
-    #     result = self.app.get('/products') 
+    def test_unhandledexception_logs(self):
+        response = self.client.get('api/v1/products/500')
+        data = json.loads(response.data.decode())
 
-    #     self.assertEqual(result.status_code, 500) 
+        last_log_dict = get_last_log_record()
 
-    # def test_success_data(self):
-    #     result = self.app.get('/products') 
+        self.assertEqual(data['message'], last_log_dict['message']) 
 
-    #     self.assertIn('Something Went Wrong', result.data)
+    def test_success_logs(self):
+        product = Product.query.first()
 
-    # def test_success_data(self):
-    # result = self.app.get('/products') 
+        with self.client:
+            response = self.client.get(f'/api/v1/products/{product.product_id}')
+            data = json.loads(response.data.decode())
 
-    # self.assertIn('Something Went Wrong', result.data)
+        last_log_dict = get_last_log_record()
+
+        self.assertEqual("200 OK", last_log_dict['message']) 
 
 if __name__ == '__main__':
     unittest.main()

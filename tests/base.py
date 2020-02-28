@@ -14,15 +14,15 @@ class BaseTestCase(TestCase):
 
     def setUp(self):
         db.create_all()
+        self._seed_db()
+        # Create test env log file and clear it on each test
+        open(log_file_path, 'w')
 
     def tearDown(self):
-        if os.path.isfile(log_file_path):
-            os.remove(log_file_path)
-
         db.session.remove()
         db.drop_all()
 
-    def seed_db(self):
+    def _seed_db(self):
         with open('test.json', 'r') as json_file:
             products = json.load(json_file)
     
