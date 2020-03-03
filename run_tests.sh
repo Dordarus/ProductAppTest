@@ -1,3 +1,3 @@
 export FLASK_ENV='test'
-nosetests --nologcapture
+nosetests --nologcapture --with-coverage --cover-package=app
 unset FLASK_ENV

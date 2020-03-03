@@ -1,0 +1,21 @@
+Returns project logs lifeline
+---
+responses:
+  200:
+    description: "successful operation"
+    schema:
+      properties:
+        time:
+          type: "string"
+        name:
+          type: "string"
+        level:
+          type: "string"
+        size:
+          type: "string"
+        message:
+          type: "string"
+        duration:
+          type: "number"
+        url:
+          type: "string"
