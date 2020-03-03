@@ -2,6 +2,7 @@
 
 ## Usage
 - [Running the application](#starting-the-application)
+- [Setup Database](#setup-database)
 - [API Documentation](#api-documentation)
 - [Running tests with coverage](#running-tests-with-coverage)
 <!-- - [Live Application](#live-application) -->
@@ -16,6 +17,26 @@ export FLASK_ENV=development
 Then run the command below to start the application.
 ```
 flask run
+```
+
+## Setup Database
+
+### Init database
+```
+flask db init
+```
+### Create migrations
+```
+flask db migrate
+```
+### Apply the migration
+```
+flask db upgrade
+```
+### Seed database
+Seed with `test.json` data
+```
+flask seed run
 ```
 
 <!-- ## Live Application
