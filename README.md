@@ -5,7 +5,7 @@
 - [Setup Database](#setup-database)
 - [API Documentation](#api-documentation)
 - [Running tests with coverage](#running-tests-with-coverage)
-<!-- - [Live Application](#live-application) -->
+- [Docker container](#docker-container)
 
 
 ## Starting the application
@@ -39,9 +39,6 @@ Seed with `test.json` data
 flask seed run
 ```
 
-<!-- ## Live Application
-This API is hosted [here](http://kbucket-api.herokuapp.com) on [heroku](heroku.com) -->
-
 ## API Documentation
 
 The api documentation is hosted as the
@@ -53,4 +50,19 @@ The api documentation is hosted as the
 You can also run tests with coverage in root of project by running this command in the terminal
 ```
 sh run_tests.sh
+```
+
+## Docker container
+
+Build Docker image
+```
+make build
+```
+Run the container
+```
+make run
+```
+Stop container
+```
+make stop
 ```
