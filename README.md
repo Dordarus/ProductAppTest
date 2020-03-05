@@ -47,6 +47,8 @@ The api documentation is hosted as the
 ```
 
 ## Running tests with coverage
+It set `FLASK_ENV` to `test`
+
 You can also run tests with coverage in root of project by running this command in the terminal
 ```
 sh run_tests.sh
@@ -54,15 +56,16 @@ sh run_tests.sh
 
 ## Docker container
 
-Build Docker image
+### Build Docker image
 ```
 make build
 ```
-Run the container
+### Run the container
+It set `FLASK_ENV` to `production`
 ```
 make run
 ```
-Stop container
+### Stop container
 ```
 make stop
 ```
